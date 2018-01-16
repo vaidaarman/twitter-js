@@ -12,10 +12,22 @@ router.get('/', function (req, res) {
 
 router.get('/stylesheets/:file', function(req, res, next) {
     var css = req.params.file;
-    
     res.sendFile(css, {root: './public/stylesheets/'}, function (err) {
         if (err) throw err;  
     })
 })
+
+router.get( '/users/:name', function(req, res, next) {
+    
+    var name = req.params.name;
+    var tweets = tweetBank.find( {name: name} );
+  res.render( 'index', { tweets: tweets } );
+});
+
+router.get( '/users/:id', function(req, res) {
+    var id = +req.params.id;
+    var tweets = tweetBank.find( {id: id} );
+  res.render( 'index', { tweets: tweets } );
+});
 
 module.exports = router;

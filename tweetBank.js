@@ -3,7 +3,14 @@ const _ = require('lodash');
 const data = [];
 
 function add(name, content) {
-  data.push({ name: name, content: content });
+    let lastId;
+    if (data[data.length - 1] === undefined) {
+        lastId = 0;
+    } else { 
+        lastId = data[data.length - 1].id;
+    }
+    const id = lastId + 1;
+  data.push({ name: name, content: content, id: id });
 }
 
 function list() {
@@ -36,7 +43,7 @@ for (let i = 0; i < 10; i++) {
   module.exports.add( getFakeName(), getFakeTweet() );
 }
 
-// module.exports.add( 'Name', 'Bla')
+module.exports.add( 'Aurora V', 'Bla')
 // console.log(find(obj => {
 // return obj.content.includes('amazing');
 // }));
